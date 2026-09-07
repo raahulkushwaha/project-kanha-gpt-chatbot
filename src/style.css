@@ -1,1 +1,55 @@
 @import "tailwindcss";
+
+/* 1. Define Tailwind v4 theme variables */
+@theme {
+  --color-midnight: var(--bg-midnight);
+  --color-surface: var(--bg-surface);
+  --color-surfaceBorder: var(--border-surface);
+  --color-inputBg: var(--bg-input);
+  --color-inputBorder: var(--border-input);
+
+  --color-gold-300: #f6dfa9;
+  --color-gold-400: #e5c378;
+  --color-gold-500: #d99b26;
+  --color-gold-600: #bf821a;
+
+  --color-parchment: var(--text-parchment);
+  --color-dimParchment: var(--text-dim);
+
+  --font-serif: 'Cinzel', serif;
+  --font-sans: 'Inter', sans-serif;
+  --font-sanskrit: 'Noto Serif Devanagari', serif;
+}
+
+/* 2. Default (Dark Mode) Theme Variables */
+:root, html.dark {
+  --bg-midnight: #0b0f14;
+  --bg-surface: #141b24;
+  --border-surface: #232e3d;
+  --bg-input: #10161f;
+  --border-input: #28374a;
+  --text-parchment: #f3ede2;
+  --text-dim: #9eabbc;
+}
+
+/* 3. Light Mode Theme Variables */
+html.light {
+  --bg-midnight: #FAF6F0;
+  --bg-surface: #FFFFFF;
+  --border-surface: #E8E1D5;
+  --bg-input: #F4EFE6;
+  --border-input: #D5CBB9;
+  --text-parchment: #1A1412;
+  --text-dim: #72675B;
+}
+
+/* Custom background & glow utilities */
+.mandala-rings {
+  background-image: radial-gradient(circle at center, transparent 35%, rgba(217, 155, 38, 0.04) 36%, transparent 37%),
+                    radial-gradient(circle at center, transparent 55%, rgba(217, 155, 38, 0.035) 56%, transparent 57%),
+                    radial-gradient(circle at center, transparent 72%, rgba(217, 155, 38, 0.02) 73%, transparent 74%);
+}
+
+.chakra-glow {
+  filter: drop-shadow(0 0 10px rgba(217, 155, 38, 0.35));
+}

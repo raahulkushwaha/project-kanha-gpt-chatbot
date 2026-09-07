@@ -1,15 +1,369 @@
 <!doctype html>
-<html lang="en">
+<html class="h-full" lang="en">
   <head>
-    <meta charset="UTF-8" />
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>project-kanha-gpt</title>
+    <title>Kanha-GPT</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Inter:wght@300;400;500;600&family=Noto+Serif+Devanagari:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Vite Entry CSS -->
+    <link rel="stylesheet" href="./src/style.css" />
   </head>
-  <body>
-    <h1 class="text-3xl font-bold underline">
-    Hello world!
-  </h1>
-    <script type="module" src="/src/main.js"></script>
+
+  <body
+    class="bg-midnight text-parchment font-sans min-h-screen flex flex-col justify-between selection:bg-gold-500/30 selection:text-gold-300 relative overflow-x-hidden antialiased"
+  >
+    <!-- Sacred Geometry Ambient Background Pattern -->
+    <div class="mandala-rings absolute inset-0 pointer-events-none z-0"></div>
+    <div
+      class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-gradient-to-b from-amber-900/10 via-amber-500/5 to-transparent blur-3xl pointer-events-none"
+    ></div>
+
+    <!-- Top Navigation -->
+    <header class="relative z-10 w-full px-6 lg:px-16 pt-6 pb-4">
+      <nav class="max-w-6xl mx-auto flex items-center justify-between">
+        <!-- Sārathi Mode Status -->
+        <div
+          class="flex items-center gap-2.5 px-4 py-2 rounded-full bg-[#121922] border border-[#222e3d] shadow-sm"
+        >
+          <span class="relative flex h-2.5 w-2.5">
+            <span
+              class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60"
+            ></span>
+            <span
+              class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500 shadow-[0_0_8px_#10b981]"
+            ></span>
+          </span>
+          <span
+            class="text-xs font-semibold tracking-wider text-[#d0d8e2] uppercase"
+          >
+            Sārathi Mode
+          </span>
+        </div>
+
+        <!-- Controls -->
+        <div class="flex items-center gap-3">
+          
+          <button
+            id="theme-toggle-btn"
+            aria-label="Toggle Contrast Mode"
+            type="button"
+            class="p-2 rounded-xl bg-[#121922] border border-[#222e3d] text-gold-400 hover:text-gold-300 transition duration-150 focus:outline-none"
+          >
+            <svg
+              id="theme-icon-sun"
+              class="w-5 h-5 hidden"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+              ></path>
+            </svg>
+            <svg
+              id="theme-icon-moon"
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+              ></path>
+            </svg>
+          </button>
+
+          <button
+            id="clear-btn"
+            type="button"
+            class="flex items-center gap-2 px-4 py-2 rounded-full bg-[#121922] border border-[#222e3d] text-dimParchment hover:text-parchment hover:border-gold-500/40 text-xs font-medium tracking-wide transition duration-200"
+          >
+            <svg
+              class="w-3.5 h-3.5 text-dimParchment"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.8"
+              viewBox="0 0 24 24"
+            >
+              <path d="M3 6h18"></path>
+              <path
+                d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
+              ></path>
+              <line x1="10" x2="10" y1="11" y2="17"></line>
+              <line x1="14" x2="14" y1="11" y2="17"></line>
+            </svg>
+            <span>clear session</span>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Main Workspace -->
+    <main
+      class="relative z-10 flex-1 flex flex-col items-center justify-center px-4 py-4 w-full"
+    >
+      <div class="w-full max-w-2xl flex flex-col items-center">
+        <!-- Hero Branding -->
+        <section class="relative flex flex-col items-center text-center mb-6">
+          <div
+            class="absolute -top-12 left-1/2 -translate-x-1/2 w-64 h-64 border border-gold-500/10 rounded-full pointer-events-none -z-10 flex items-center justify-center"
+          >
+            <div class="w-48 h-48 border border-gold-500/10 rounded-full"></div>
+          </div>
+
+          <div class="mb-3 chakra-glow">
+            <div
+              class="w-12 h-12 rounded-full border border-gold-500/50 bg-[#161a22] flex items-center justify-center text-gold-400 shadow-inner"
+            >
+              <svg
+                class="w-7 h-7 text-gold-400"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="4"
+                viewBox="0 0 100 100"
+              >
+                <circle
+                  cx="50"
+                  cy="50"
+                  r="42"
+                  stroke="currentColor"
+                  stroke-dasharray="1 3"
+                  stroke-width="4"
+                ></circle>
+                <circle
+                  cx="50"
+                  cy="50"
+                  r="37"
+                  stroke="currentColor"
+                  stroke-width="2"
+                ></circle>
+                <circle cx="50" cy="50" fill="currentColor" r="10"></circle>
+                <circle cx="50" cy="50" fill="#161a22" r="6"></circle>
+                <line
+                  stroke="currentColor"
+                  stroke-width="3"
+                  x1="50"
+                  x2="50"
+                  y1="13"
+                  y2="40"
+                ></line>
+                <line
+                  stroke="currentColor"
+                  stroke-width="3"
+                  x1="50"
+                  x2="50"
+                  y1="60"
+                  y2="87"
+                ></line>
+                <line
+                  stroke="currentColor"
+                  stroke-width="3"
+                  x1="13"
+                  x2="40"
+                  y1="50"
+                  y2="50"
+                ></line>
+                <line
+                  stroke="currentColor"
+                  stroke-width="3"
+                  x1="60"
+                  x2="87"
+                  y1="50"
+                  y2="50"
+                ></line>
+                <line
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  x1="24"
+                  x2="43"
+                  y1="24"
+                  y2="43"
+                ></line>
+                <line
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  x1="57"
+                  x2="76"
+                  y1="57"
+                  y2="76"
+                ></line>
+                <line
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  x1="24"
+                  x2="43"
+                  y1="76"
+                  y2="57"
+                ></line>
+                <line
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  x1="57"
+                  x2="76"
+                  y1="43"
+                  y2="24"
+                ></line>
+              </svg>
+            </div>
+          </div>
+
+          <h1
+            class="font-serif text-3xl sm:text-4xl lg:text-[42px] font-bold tracking-[0.18em] text-transparent bg-clip-text bg-gradient-to-b from-[#ffeed3] via-[#e5c378] to-[#c59c47] mb-1"
+          >
+            KANHA-GPT
+          </h1>
+          <p
+            class="font-serif italic text-base sm:text-lg text-dimParchment tracking-wide font-normal"
+          >
+            Krishna for every Arjuna
+          </p>
+        </section>
+
+        <!-- Chat Feed -->
+        <div
+          id="chat-box"
+          class="w-full space-y-4 mb-6 max-h-[380px] overflow-y-auto pr-1 scroll-smooth"
+        >
+          <div
+            id="welcome-card"
+            class="w-full bg-surface border border-surfaceBorder rounded-2xl p-6 sm:px-8 sm:py-7 text-center shadow-2xl relative overflow-hidden backdrop-blur-md"
+          >
+            <div class="flex items-center justify-center gap-3 mb-4">
+              <span
+                class="h-px w-10 bg-gradient-to-r from-transparent to-gold-500/60"
+              ></span>
+              <h2
+                class="text-xs font-semibold tracking-[0.2em] text-gold-400 uppercase"
+              >
+                Bhagavad Gītā 2.47
+              </h2>
+              <span
+                class="h-px w-10 bg-gradient-to-l from-transparent to-gold-500/60"
+              ></span>
+            </div>
+            <blockquote
+              class="text-lg sm:text-xl font-medium tracking-wide text-[#f5ebd8] italic font-serif mb-3"
+            >
+              “कर्मण्येवाधिकारस्ते मा फलेषु कदाचन...”
+            </blockquote>
+            <p
+              class="text-xs sm:text-sm text-dimParchment font-normal leading-relaxed max-w-lg mx-auto"
+            >
+              You have a right only to work, never to its fruits. Let not the
+              fruit of action be your motive.
+            </p>
+          </div>
+        </div>
+
+        <!-- Search Input Form -->
+        <section class="w-full mb-6">
+          <form id="chat-form" class="relative flex items-center w-full">
+            <input
+              type="text"
+              id="user-input"
+              class="w-full bg-inputBg text-parchment placeholder-dimParchment/70 text-sm sm:text-base pl-6 pr-16 py-4 rounded-full border border-inputBorder focus:border-gold-500/70 focus:ring-2 focus:ring-gold-500/20 shadow-lg outline-none transition-all"
+              placeholder="Ask the Sārathi your life dilemma..."
+              required
+            />
+            <button
+              type="submit"
+              id="send-btn"
+              aria-label="Submit dilemma"
+              class="absolute right-2.5 w-11 h-11 rounded-full bg-gradient-to-r from-gold-500 to-[#e6a73c] hover:brightness-110 active:scale-95 text-midnight flex items-center justify-center font-black transition-all shadow-md cursor-pointer"
+            >
+              <svg
+                class="w-5 h-5 stroke-current"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2.6"
+                viewBox="0 0 24 24"
+              >
+                <polyline points="9 18 15 12 9 6"></polyline>
+                <polyline points="14 18 20 12 14 6"></polyline>
+              </svg>
+            </button>
+          </form>
+        </section>
+
+        <!-- Starter Prompts -->
+        <section
+          id="starter-prompts"
+          class="w-full flex flex-col space-y-3.5 px-2"
+        >
+          <button
+            class="dilemma-chip group flex items-start text-left gap-3 text-dimParchment hover:text-parchment transition duration-150 py-1 cursor-pointer"
+            type="button"
+          >
+            <span
+              class="text-base text-dimParchment group-hover:text-gold-400 group-hover:translate-x-0.5 transition-all select-none"
+              >↳</span
+            >
+            <span class="text-sm font-normal leading-snug"
+              >Experiencing severe burnout: how to work without anxiety over
+              results?</span
+            >
+          </button>
+
+          <button
+            class="dilemma-chip group flex items-start text-left gap-3 text-dimParchment hover:text-parchment transition duration-150 py-1 cursor-pointer"
+            type="button"
+          >
+            <span
+              class="text-base text-dimParchment group-hover:text-gold-400 group-hover:translate-x-0.5 transition-all select-none"
+              >↳</span
+            >
+            <span class="text-sm font-normal leading-snug"
+              >Torn between corporate career loyalty and personal ethics</span
+            >
+          </button>
+
+          <button
+            class="dilemma-chip group flex items-start text-left gap-3 text-dimParchment hover:text-parchment transition duration-150 py-1 cursor-pointer"
+            type="button"
+          >
+            <span
+              class="text-base text-dimParchment group-hover:text-gold-400 group-hover:translate-x-0.5 transition-all select-none"
+              >↳</span
+            >
+            <span class="text-sm font-normal leading-snug"
+              >Decision paralysis: how to act when every choice carries
+              sacrifice?</span
+            >
+          </button>
+        </section>
+      </div>
+    </main>
+
+    <!-- Canonical Footer -->
+    <footer class="relative z-10 w-full pb-6 pt-2 text-center">
+      <div class="flex flex-col items-center gap-2">
+        <div class="w-10 h-1 rounded-full bg-[#1c2430] mb-1"></div>
+        <p
+          class="font-mono text-[11px] text-[#526071] tracking-widest uppercase selection:text-gold-400"
+        >
+          Śānti Parva &nbsp;•&nbsp; Bhagavad Gītā &nbsp;•&nbsp; Vana Parva
+        </p>
+      </div>
+    </footer>
+
+    <script type="module" src="./src/main.js"></script>
   </body>
 </html>
