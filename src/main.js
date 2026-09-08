@@ -2,12 +2,57 @@ import axios from "axios";
 
 const API_URL = "http://127.0.0.1:8000/api/chat";
 
+const themeToggleBtn = document.getElementById("theme-toggle-btn");
+const themeIconSun = document.getElementById("theme-icon-sun");
+const themeIconMoon = document.getElementById("theme-icon-moon");
 const chatBox = document.getElementById("chat-box");
 const chatForm = document.getElementById("chat-form");
 const userInput = document.getElementById("user-input");
 const clearBtn = document.getElementById("clear-btn");
 const dilemmaChips = document.querySelectorAll(".dilemma-chip");
 const starterPrompts = document.getElementById("starter-prompts");
+
+function initTheme() {
+  const savedTheme = localStorage.getItem("theme");
+
+  if (savedTheme === "light") {
+    document.documentElement.classList.remove("dark");
+    document.documentElement.classList.add("light");
+    themeIconSun?.classList.remove("hidden");
+    themeIconMoon?.classList.add("hidden");
+  } else {
+    document.documentElement.classList.remove("light");
+    document.documentElement.classList.add("dark");
+    themeIconSun?.classList.add("hidden");
+    themeIconMoon?.classList.remove("hidden");
+  }
+}
+
+// Toggle Theme Event Handler
+themeToggleBtn?.addEventListener("click", () => {
+  const isLight = document.documentElement.classList.contains("light");
+
+  if (isLight) {
+    // Switch to Dark Mode
+    document.documentElement.classList.remove("light");
+    document.documentElement.classList.add("dark");
+    localStorage.setItem("theme", "dark");
+
+    themeIconSun?.classList.add("hidden");
+    themeIconMoon?.classList.remove("hidden");
+  } else {
+    // Switch to Light Mode
+    document.documentElement.classList.remove("dark");
+    document.documentElement.classList.add("light");
+    localStorage.setItem("theme", "light");
+
+    themeIconSun?.classList.remove("hidden");
+    themeIconMoon?.classList.add("hidden");
+  }
+});
+
+// Run initialization on script load
+initTheme();
 
 function appendMessage(sender, text, citation = null, purushartha = null) {
   const wrapper = document.createElement("div");
@@ -17,7 +62,8 @@ function appendMessage(sender, text, citation = null, purushartha = null) {
 
   if (isUser) {
     wrapper.innerHTML = `
-      <div class="max-w-[85%] bg-gold-500/20 border border-gold-500/40 text-gold-300 px-5 py-3 rounded-2xl rounded-tr-sm text-sm font-medium shadow-md">
+      <!-- Change text-gold-300 to text-parchment or text-gold-600 dark:text-gold-300 -->
+      <div class="max-w-[85%] bg-gold-500/20 border border-gold-500/40 text-parchment px-5 py-3 rounded-2xl rounded-tr-sm text-sm font-medium shadow-md">
         ${text}
       </div>
     `;
@@ -26,18 +72,19 @@ function appendMessage(sender, text, citation = null, purushartha = null) {
     if (citation || purushartha) {
       metaTags = `
         <div class="flex flex-wrap gap-2 pt-2 mt-3 border-t border-surfaceBorder text-xs">
-          ${citation ? `<span class="bg-gold-500/10 text-gold-400 px-2.5 py-1 rounded-md border border-gold-500/30 font-semibold uppercase tracking-wider">📖 ${citation}</span>` : ""}
-          ${purushartha ? `<span class="bg-emerald-950/60 text-emerald-300 px-2.5 py-1 rounded-md border border-emerald-800/40 font-semibold uppercase tracking-wider">✨ ${purushartha}</span>` : ""}
+          ${citation ? `<span class="bg-gold-500/10 text-gold-500 px-2.5 py-1 rounded-md border border-gold-500/30 font-semibold uppercase tracking-wider">📖 ${citation}</span>` : ""}
+          ${purushartha ? `<span class="bg-emerald-950/60 dark:bg-emerald-950/60 light:bg-emerald-100 text-emerald-600 dark:text-emerald-300 px-2.5 py-1 rounded-md border border-emerald-800/40 font-semibold uppercase tracking-wider">✨ ${purushartha}</span>` : ""}
         </div>
       `;
     }
 
     wrapper.innerHTML = `
       <div class="max-w-[90%] bg-surface border border-surfaceBorder text-parchment p-5 rounded-2xl rounded-tl-sm text-sm leading-relaxed shadow-xl space-y-2">
-        <div class="flex items-center gap-2 text-gold-400 font-serif font-bold text-xs uppercase tracking-widest">
+        <div class="flex items-center gap-2 text-gold-500 font-serif font-bold text-xs uppercase tracking-widest">
           <span>🛞</span> Sārathi Guidance
         </div>
-        <p class="text-parchment/95">${text}</p>
+        <!-- Ensured text uses text-parchment variable -->
+        <p class="text-parchment">${text}</p>
         ${metaTags}
       </div>
     `;
