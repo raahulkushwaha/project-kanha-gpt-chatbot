@@ -12,6 +12,7 @@ const clearBtn = document.getElementById("clear-btn");
 const dilemmaChips = document.querySelectorAll(".dilemma-chip");
 const starterPrompts = document.getElementById("starter-prompts");
 const heroContainer = document.getElementById("hero-container");
+const appFooter = document.getElementById("app-footer");
 
 function initTheme() {
   const savedTheme = localStorage.getItem("theme");
@@ -106,6 +107,10 @@ async function handleQuery(queryText) {
     starterPrompts.style.display = "none";
   }
 
+  if (appFooter) {
+    appFooter.style.display = "none";
+  }
+
   appendMessage("user", queryText);
 
   const loader = document.createElement("div");
@@ -165,5 +170,8 @@ clearBtn?.addEventListener("click", () => {
   chatBox.innerHTML = "";
   if (starterPrompts) {
     starterPrompts.style.display = "flex";
+  }
+  if (appFooter) {
+    appFooter.style.display = "block";
   }
 });
