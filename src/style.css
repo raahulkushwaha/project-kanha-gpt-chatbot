@@ -75,3 +75,25 @@ html.light {
 .chakra-glow {
   filter: drop-shadow(0 0 10px rgba(217, 155, 38, 0.35));
 }
+
+/* Chat layout transition */
+#hero-container {
+  flex: 0 0 auto;
+}
+
+#hero-container.chat-active {
+  flex: 0 0 auto;
+}
+
+#hero-container.chat-active #hero-branding {
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+#hero-container.chat-active #hero-subtitle {
+  display: none;
+}
+
+#hero-container.chat-active #welcome-card {
+  display: none;
+}

@@ -11,6 +11,7 @@ const userInput = document.getElementById("user-input");
 const clearBtn = document.getElementById("clear-btn");
 const dilemmaChips = document.querySelectorAll(".dilemma-chip");
 const starterPrompts = document.getElementById("starter-prompts");
+const heroContainer = document.getElementById("hero-container");
 
 function initTheme() {
   const savedTheme = localStorage.getItem("theme");
@@ -99,6 +100,8 @@ async function handleQuery(queryText) {
   if (!queryText.trim()) return;
   if (!chatBox) return;
 
+  heroContainer?.classList.add("chat-active");
+
   if (starterPrompts) {
     starterPrompts.style.display = "none";
   }
@@ -158,23 +161,8 @@ dilemmaChips.forEach((chip) => {
 
 clearBtn?.addEventListener("click", () => {
   if (!chatBox) return;
-  chatBox.innerHTML = `
-    <div id="welcome-card" class="w-full bg-surface border border-surfaceBorder rounded-2xl p-6 sm:px-8 sm:py-7 text-center shadow-2xl relative overflow-hidden backdrop-blur-md">
-      <div class="flex items-center justify-center gap-3 mb-4">
-        <span class="h-px w-10 bg-gradient-to-r from-transparent to-gold-500/60"></span>
-        <h2 class="text-xs font-semibold tracking-[0.2em] text-gold-400 uppercase">
-          Bhagavad Gītā 2.47
-        </h2>
-        <span class="h-px w-10 bg-gradient-to-l from-transparent to-gold-500/60"></span>
-      </div>
-      <blockquote class="text-lg sm:text-xl font-medium tracking-wide text-parchment italic font-serif mb-3">
-        “कर्मण्येवाधिकारस्ते मा फलेषु कदाचन...”
-      </blockquote>
-      <p class="text-xs sm:text-sm text-dimParchment font-normal leading-relaxed max-w-lg mx-auto">
-        You have a right only to work, never to its fruits. Let not the fruit of action be your motive.
-      </p>
-    </div>
-  `;
+  heroContainer?.classList.remove("chat-active");
+  chatBox.innerHTML = "";
   if (starterPrompts) {
     starterPrompts.style.display = "flex";
   }

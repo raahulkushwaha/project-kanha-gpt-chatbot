@@ -121,11 +121,13 @@
 
     <!-- Main Workspace -->
     <main
-      class="relative z-10 flex-1 flex flex-col items-center justify-center px-4 py-4 w-full"
+      class="relative z-10 flex-1 flex flex-col items-center px-4 py-4 w-full h-full min-h-0 overflow-hidden"
     >
-      <div class="w-full max-w-2xl flex flex-col items-center">
+      <div class="w-full max-w-2xl flex flex-col h-full">
+        <!-- Hero Container -->
+        <div id="hero-container" class="flex flex-col items-center transition-all duration-300 shrink-0">
         <!-- Hero Branding -->
-        <section class="relative flex flex-col items-center text-center mb-3">
+        <section id="hero-branding" class="relative flex flex-col items-center text-center mb-3">
           <div
             class="absolute -top-12 left-1/2 -translate-x-1/2 w-64 h-64 border border-gold-500/10 rounded-full pointer-events-none -z-10 flex items-center justify-center"
           >
@@ -234,21 +236,18 @@
             KANHA-GPT
           </h1>
           <p
+            id="hero-subtitle"
             class="font-serif italic text-base sm:text-lg text-dimParchment tracking-wide font-normal"
           >
             Krishna for every Arjuna
           </p>
         </section>
 
-        <!-- Chat Feed -->
+        <!-- Welcome Card -->
         <div
-          id="chat-box"
-          class="w-full space-y-4 mb-6 max-h-[320px] overflow-y-auto pr-1 scroll-smooth"
+          id="welcome-card"
+          class="w-full bg-surface/10 border border-surfaceBorder rounded-xl p-6 sm:px-8 sm:py-7 text-center shadow relative overflow-hidden backdrop-blur-md transition-all duration-300"
         >
-          <div
-            id="welcome-card"
-            class="w-full bg-surface/10 border border-surfaceBorder rounded-xl p-6 sm:px-8 sm:py-7 text-center shadow relative overflow-hidden backdrop-blur-md"
-          >
             <div class="flex items-center justify-center gap-3 mb-4">
               <span
                 class="h-px w-10 bg-gradient-to-r from-transparent to-gold-500/60"
@@ -276,8 +275,15 @@
           </div>
         </div>
 
+        <!-- Chat Feed -->
+        <div
+          id="chat-box"
+          class="w-full space-y-4 mb-6 overflow-y-auto pr-1 scroll-smooth flex-1 min-h-0"
+        >
+        </div>
+
         <!-- Search Input Form -->
-        <section class="w-full mb-6">
+        <section id="input-container" class="w-full mb-6 shrink-0">
           <form id="chat-form" class="relative flex items-center w-full">
             <input
               type="text"
@@ -310,7 +316,7 @@
         <!-- Starter Prompts -->
         <section
           id="starter-prompts"
-          class="w-full flex flex-col space-y-3.5 px-2"
+          class="w-full flex flex-col space-y-3.5 px-2 shrink-0"
         >
           <button
             class="dilemma-chip group flex items-start text-left gap-3 text-dimParchment hover:text-parchment transition duration-150 py-1 cursor-pointer"
@@ -357,7 +363,7 @@
     </main>
 
     <!-- Canonical Footer -->
-    <footer class="relative z-10 w-full pb-3 pt-1 text-center">
+    <footer class="relative z-10 w-full pb-3 pt-1 text-center shrink-0">
       <div class="flex flex-col items-center gap-2">
         <div class="w-10 h-1 rounded-full bg-surfaceBorder mb-1"></div>
         <p
