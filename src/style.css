@@ -16,6 +16,9 @@
   --color-gold-500: #d99b26;
   --color-gold-600: #bf821a;
 
+  --color-goldSelection: var(--selection-bg);
+  --color-goldSelectionText: var(--selection-text);
+
   --color-parchment: var(--text-parchment);
   --color-dimParchment: var(--text-dim);
 
@@ -34,6 +37,8 @@ html.dark {
   --border-input: #28374a;
   --text-parchment: #f3ede2;
   --text-dim: #9eabbc;
+  --selection-bg: rgba(217, 155, 38, 0.35);
+  --selection-text: #f6dfa9;
   color-scheme: dark;
 }
 
@@ -46,6 +51,8 @@ html.light {
   --border-input: #d5cbb9;
   --text-parchment: #1a1412;
   --text-dim: #72675b;
+  --selection-bg: #e5c378;
+  --selection-text: #1a1412;
   color-scheme: light;
 }
 
