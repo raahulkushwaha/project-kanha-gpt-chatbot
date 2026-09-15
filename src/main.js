@@ -55,6 +55,7 @@ themeToggleBtn?.addEventListener("click", () => {
 initTheme();
 
 function appendMessage(sender, text, citation = null, purushartha = null) {
+  if (!chatBox) return;
   const wrapper = document.createElement("div");
   const isUser = sender === "user";
 
@@ -73,7 +74,7 @@ function appendMessage(sender, text, citation = null, purushartha = null) {
       metaTags = `
         <div class="flex flex-wrap gap-2 pt-2 mt-3 border-t border-surfaceBorder text-xs">
           ${citation ? `<span class="bg-gold-500/10 text-gold-500 px-2.5 py-1 rounded-md border border-gold-500/30 font-semibold uppercase tracking-wider">📖 ${citation}</span>` : ""}
-          ${purushartha ? `<span class="bg-emerald-950/60 dark:bg-emerald-950/60 light:bg-emerald-100 text-emerald-600 dark:text-emerald-300 px-2.5 py-1 rounded-md border border-emerald-800/40 font-semibold uppercase tracking-wider">✨ ${purushartha}</span>` : ""}
+          ${purushartha ? `<span class="bg-emerald-950/60 text-emerald-300 px-2.5 py-1 rounded-md border border-emerald-800/40 font-semibold uppercase tracking-wider">✨ ${purushartha}</span>` : ""}
         </div>
       `;
     }
@@ -96,6 +97,7 @@ function appendMessage(sender, text, citation = null, purushartha = null) {
 
 async function handleQuery(queryText) {
   if (!queryText.trim()) return;
+  if (!chatBox) return;
 
   if (starterPrompts) {
     starterPrompts.style.display = "none";
@@ -140,6 +142,7 @@ async function handleQuery(queryText) {
 
 chatForm?.addEventListener("submit", (e) => {
   e.preventDefault();
+  if (!userInput) return;
   const text = userInput.value;
   userInput.value = "";
   handleQuery(text);
@@ -154,6 +157,7 @@ dilemmaChips.forEach((chip) => {
 });
 
 clearBtn?.addEventListener("click", () => {
+  if (!chatBox) return;
   chatBox.innerHTML = `
     <div id="welcome-card" class="w-full bg-surface border border-surfaceBorder rounded-2xl p-6 sm:px-8 sm:py-7 text-center shadow-2xl relative overflow-hidden backdrop-blur-md">
       <div class="flex items-center justify-center gap-3 mb-4">
@@ -163,7 +167,7 @@ clearBtn?.addEventListener("click", () => {
         </h2>
         <span class="h-px w-10 bg-gradient-to-l from-transparent to-gold-500/60"></span>
       </div>
-      <blockquote class="text-lg sm:text-xl font-medium tracking-wide text-[#f5ebd8] italic font-serif mb-3">
+      <blockquote class="text-lg sm:text-xl font-medium tracking-wide text-parchment italic font-serif mb-3">
         “कर्मण्येवाधिकारस्ते मा फलेषु कदाचन...”
       </blockquote>
       <p class="text-xs sm:text-sm text-dimParchment font-normal leading-relaxed max-w-lg mx-auto">
