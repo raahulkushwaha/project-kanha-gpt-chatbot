@@ -1,4 +1,5 @@
 import axios from "axios";
+import { marked } from "marked";
 
 const API_URL = "http://127.0.0.1:8000/api/chat";
 
@@ -71,6 +72,7 @@ function appendMessage(sender, text, citation = null, purushartha = null) {
       </div>
     `;
   } else {
+    const parsedHtml = marked.parse(text);
     let metaTags = "";
     if (citation || purushartha) {
       metaTags = `
@@ -87,7 +89,7 @@ function appendMessage(sender, text, citation = null, purushartha = null) {
           <span>🛞</span> Sārathi Guidance
         </div>
         <!-- Ensured text uses text-parchment variable -->
-        <p class="text-parchment">${text}</p>
+        <div class="content-body">${parsedHtml}</div>
         ${metaTags}
       </div>
     `;
@@ -143,7 +145,7 @@ async function handleQuery(queryText) {
     document.getElementById("loading-indicator")?.remove();
     appendMessage(
       "bot",
-      "Unable to connect to the Sarathi backend server. Please verify FastAPI is running on http://127.0.0.1:8000.",
+      "Unable to connect to the Sarathi.",
     );
   }
 }
